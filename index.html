@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Good Morning Ankku Dii 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  :root {
+    --gold: #FFD700;
+    --rose: #FF6B9D;
+    --pink: #FF4D8D;
+    --deep: #1a0030;
+    --purple: #7C3AED;
+    --teal: #06B6D4;
+    --white: #fff;
+  }
+
+  html, body {
+    width: 100%; height: 100%; overflow: hidden;
+    font-family: 'Quicksand', sans-serif;
+    background: #000;
+    touch-action: manipulation;
+  }
+
+  /* ===================== PAGE SYSTEM ===================== */
+  .page {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.8s ease;
+    overflow: hidden;
+  }
+  .page.active { opacity: 1; pointer-events: all; }
+
+  /* ===================== PAGE 1: INTRO ===================== */
+  #page1 {
+    background: radial-gradient(ellipse at center, #12003a 0%, #000 70%);
+    flex-direction: column;
+    perspective: 1200px;
+  }
+
+  .starfield {
+    position: absolute; inset: 0;
+    overflow: hidden;
+  }
+  .star {
+    position: absolute; border-radius: 50%;
+    background: white; animation: twinkle var(--d) infinite ease-in-out;
+  }
+  @keyframes twinkle {
+    0%,100%{opacity:0.1;transform:scale(0.8);}
+    50%{opacity:1;transform:scale(1.3);}
+  }
+
+  .floating-3d-scene {
+    position: relative; z-index: 2;
+    display: flex; flex-direction: column; align-items: center;
+    transform-style: preserve-3d;
+    animation: sceneFloat 6s ease-in-out infinite;
+  }
+  @keyframes sceneFloat {
+    0%,100%{transform:rotateX(5deg) translateY(0);}
+    50%{transform:rotateX(-5deg) translateY(-20px);}
+  }
+
+  .orb-3d {
+    width: min(220px, 55vw); height: min(220px, 55vw);
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%,
+      #fff 0%, #FFD700 20%, #FF6B9D 50%, #7C3AED 80%, #12003a 100%);
+    box-shadow:
+      0 0 60px #FFD70088,
+      0 0 120px #FF6B9D55,
+      inset 0 0 40px rgba(255,255,255,0.3);
+    animation: orbSpin 8s linear infinite, orbPulse 3s ease-in-out infinite;
+    position: relative;
+    transform-style: preserve-3d;
+  }
+  @keyframes orbSpin {
+    from{transform:rotateY(0deg) rotateZ(0deg);}
+    to{transform:rotateY(360deg) rotateZ(360deg);}
+  }
+  @keyframes orbPulse {
+    0%,100%{box-shadow:0 0 60px #FFD70088,0 0 120px #FF6B9D55,inset 0 0 40px rgba(255,255,255,0.3);}
+    50%{box-shadow:0 0 100px #FFD700cc,0 0 200px #FF6B9Daa,inset 0 0 60px rgba(255,255,255,0.5);}
+  }
+
+  .orb-ring {
+    position: absolute; inset: -15px;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #FFD700;
+    border-right-color: #FF6B9D;
+    animation: ringRotate 3s linear infinite;
+  }
+  .orb-ring:nth-child(2){
+    inset: -30px;
+    border-top-color: #7C3AED;
+    border-bottom-color: #06B6D4;
+    animation-duration: 5s; animation-direction: reverse;
+  }
+  @keyframes ringRotate {
+    from{transform:rotateX(70deg) rotate(0deg);}
+    to{transform:rotateX(70deg) rotate(360deg);}
+  }
+
+  .intro-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 7vw, 3.5rem);
+    font-weight: 900;
+    color: transparent;
+    background: linear-gradient(135deg, #FFD700, #FF6B9D, #7C3AED, #06B6D4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    text-align: center;
+    margin-top: 30px;
+    letter-spacing: 2px;
+    text-shadow: none;
+    animation: titleGlow 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px #FFD70088);
+  }
+  @keyframes titleGlow {
+    0%,100%{filter:drop-shadow(0 0 20px #FFD70088);}
+    50%{filter:drop-shadow(0 0 40px #FF6B9Dcc);}
+  }
+
+  /* ===================== COUNTDOWN ===================== */
+  .countdown-wrap {
+    margin-top: 40px;
+    display: flex; flex-direction: column; align-items: center;
+    z-index: 5; position: relative;
+  }
+
+  .countdown-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 20vw, 9rem);
+    font-weight: 900;
+    color: transparent;
+    background: linear-gradient(180deg, #FFD700 0%, #FF4D8D 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    line-height: 1;
+    animation: countPop 1s ease-in-out forwards;
+    transform-origin: center;
+  }
+  @keyframes countPop {
+    0%{transform:scale(2) rotateY(90deg);opacity:0;}
+    60%{transform:scale(0.9) rotateY(-15deg);opacity:1;}
+    100%{transform:scale(1) rotateY(0deg);opacity:1;}
+  }
+  .countdown-label {
+    color: #ffffff88;
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-top: 5px;
+  }
+
+  /* 3D floating cubes */
+  .cube-container {
+    position: absolute; inset: 0; pointer-events: none;
+    perspective: 800px;
+  }
+  .mini-cube {
+    position: absolute;
+    width: 30px; height: 30px;
+    transform-style: preserve-3d;
+    animation: cubeFly var(--dur) linear infinite;
+  }
+  .mini-cube div {
+    position: absolute; width: 100%; height: 100%;
+    border: 1.5px solid rgba(255,215,0,0.3);
+    background: rgba(255,107,157,0.05);
+  }
+  .mini-cube div:nth-child(1){transform:translateZ(15px);}
+  .mini-cube div:nth-child(2){transform:translateZ(-15px);}
+  .mini-cube div:nth-child(3){transform:rotateY(90deg) translateZ(15px);}
+  .mini-cube div:nth-child(4){transform:rotateY(-90deg) translateZ(15px);}
+  .mini-cube div:nth-child(5){transform:rotateX(90deg) translateZ(15px);}
+  .mini-cube div:nth-child(6){transform:rotateX(-90deg) translateZ(15px);}
+  @keyframes cubeFly {
+    0%{transform:translate(var(--sx),var(--sy)) rotateX(0) rotateY(0) rotateZ(0);opacity:0;}
+    10%{opacity:1;}
+    90%{opacity:1;}
+    100%{transform:translate(var(--ex),var(--ey)) rotateX(720deg) rotateY(360deg) rotateZ(180deg);opacity:0;}
+  }
+
+  /* ===================== PAGE 2: GOOD MORNING ===================== */
+  #page2 {
+    background: linear-gradient(135deg, #0d001f 0%, #1a0038 40%, #000d2a 100%);
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .aurora {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse 80% 40% at 20% 0%, rgba(255,107,157,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 40% at 80% 100%, rgba(124,58,237,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 30% at 50% 50%, rgba(6,182,212,0.1) 0%, transparent 70%);
+    animation: auroraPulse 8s ease-in-out infinite;
+  }
+  @keyframes auroraPulse {
+    0%,100%{opacity:0.6;transform:scale(1);}
+    50%{opacity:1;transform:scale(1.1);}
+  }
+
+  .morning-scene {
+    position: relative; z-index: 3;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 20px;
+    width: 100%;
+    animation: pageIn 1.2s cubic-bezier(0.34,1.56,0.64,1) forwards;
+  }
+  @keyframes pageIn {
+    from{transform:scale(0.5) rotateY(90deg);opacity:0;}
+    to{transform:scale(1) rotateY(0deg);opacity:1;}
+  }
+
+  .sun-3d {
+    width: min(130px, 35vw); height: min(130px, 35vw);
+    border-radius: 50%;
+    background: radial-gradient(circle at 40% 40%, #fff 0%, #FFD700 30%, #FF8C00 70%, #FF4500 100%);
+    box-shadow:
+      0 0 0 10px rgba(255,215,0,0.15),
+      0 0 0 25px rgba(255,215,0,0.1),
+      0 0 0 45px rgba(255,215,0,0.05),
+      0 0 80px rgba(255,165,0,0.6);
+    animation: sunRise 1.5s ease-out forwards, sunGlow 4s 1.5s ease-in-out infinite;
+    transform: translateY(100px) scale(0.3);
+    position: relative; margin-bottom: 10px;
+  }
+  @keyframes sunRise {
+    to{transform:translateY(0) scale(1);}
+  }
+  @keyframes sunGlow {
+    0%,100%{box-shadow:0 0 0 10px rgba(255,215,0,0.15),0 0 0 25px rgba(255,215,0,0.1),0 0 0 45px rgba(255,215,0,0.05),0 0 80px rgba(255,165,0,0.6);}
+    50%{box-shadow:0 0 0 15px rgba(255,215,0,0.25),0 0 0 35px rgba(255,215,0,0.15),0 0 0 65px rgba(255,215,0,0.08),0 0 120px rgba(255,165,0,0.8);}
+  }
+
+  /* Sun rays */
+  .sun-rays {
+    position: absolute; inset: -50%; pointer-events: none;
+    animation: raysRotate 20s linear infinite;
+  }
+  .ray {
+    position: absolute;
+    width: 3px; background: linear-gradient(to top, rgba(255,215,0,0.6), transparent);
+    transform-origin: bottom center;
+    left: 50%; bottom: 50%;
+  }
+  @keyframes raysRotate {
+    from{transform:rotate(0);}
+    to{transform:rotate(360deg);}
+  }
+
+  .greeting-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 6vw, 3rem);
+    font-weight: 900;
+    color: #FFD700;
+    text-align: center;
+    line-height: 1.3;
+    margin: 10px 0;
+    animation: greetAppear 1s 0.5s both;
+    filter: drop-shadow(0 0 15px rgba(255,215,0,0.5));
+  }
+  .greeting-name {
+    font-size: clamp(2rem, 9vw, 4.5rem);
+    background: linear-gradient(135deg, #FF6B9D, #FFD700, #FF6B9D);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    background-size: 200% 200%;
+    animation: greetAppear 1s 0.8s both, nameShimmer 3s 1.8s ease-in-out infinite;
+    display: block;
+  }
+  @keyframes greetAppear {
+    from{transform:translateY(40px) scale(0.8);opacity:0;}
+    to{transform:translateY(0) scale(1);opacity:1;}
+  }
+  @keyframes nameShimmer {
+    0%,100%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+  }
+
+  .emoji-rain {
+    position: absolute; inset: 0; pointer-events: none; overflow: hidden;
+  }
+  .falling-emoji {
+    position: absolute; font-size: clamp(1.2rem, 4vw, 2rem);
+    animation: fall var(--fd) var(--fd2) linear infinite;
+    top: -50px;
+  }
+  @keyframes fall {
+    0%{transform:translateY(-60px) rotate(0deg);opacity:1;}
+    100%{transform:translateY(110vh) rotate(360deg);opacity:0.3;}
+  }
+
+  .morning-msg {
+    color: rgba(255,255,255,0.8);
+    font-size: clamp(0.75rem, 2.5vw, 1rem);
+    text-align: center;
+    line-height: 1.7;
+    max-width: 340px;
+    margin: 15px auto;
+    padding: 15px 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    animation: greetAppear 1s 1.2s both;
+  }
+
+  .btn-3d {
+    margin-top: 20px;
+    padding: clamp(12px,3vw,16px) clamp(28px,7vw,48px);
+    font-family: 'Quicksand', sans-serif;
+    font-size: clamp(0.85rem, 3vw, 1.1rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+    background: linear-gradient(135deg, #FF6B9D, #7C3AED);
+    border: none; border-radius: 50px; cursor: pointer;
+    box-shadow:
+      0 8px 25px rgba(255,107,157,0.4),
+      0 3px 0 #8B0059,
+      inset 0 1px 0 rgba(255,255,255,0.3);
+    animation: greetAppear 1s 1.5s both;
+    transform-style: preserve-3d;
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+  .btn-3d:active {
+    transform: translateY(3px);
+    box-shadow: 0 4px 15px rgba(255,107,157,0.4), 0 0 0 #8B0059, inset 0 1px 0 rgba(255,255,255,0.3);
+  }
+
+  /* ===================== PAGE 3: HEALTH CHECK ===================== */
+  #page3 {
+    background: linear-gradient(135deg, #001a12 0%, #003322 40%, #001a30 100%);
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px 15px 40px;
+  }
+
+  .health-header {
+    text-align: center; padding-top: 10px; margin-bottom: 20px; width: 100%;
+  }
+  .health-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 6vw, 2.5rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #00FF88, #06B6D4);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    filter: drop-shadow(0 0 15px rgba(0,255,136,0.4));
+  }
+  .health-sub {
+    color: rgba(255,255,255,0.5); font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+    margin-top: 5px; letter-spacing: 1px;
+  }
+
+  /* FINGERPRINT SCANNER */
+  .fp-container {
+    display: flex; flex-direction: column; align-items: center;
+    margin-bottom: 25px; width: 100%; max-width: 380px;
+  }
+
+  .fp-scanner {
+    width: min(200px, 55vw); height: min(200px, 55vw);
+    border-radius: 50%;
+    position: relative; cursor: pointer;
+    user-select: none; -webkit-user-select: none;
+  }
+  .fp-bg {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: radial-gradient(circle at 50% 50%, #002a1a, #001510);
+    border: 3px solid rgba(0,255,136,0.3);
+    box-shadow: 0 0 30px rgba(0,255,136,0.1), inset 0 0 20px rgba(0,255,136,0.05);
+    transition: all 0.3s;
+    overflow: hidden;
+  }
+
+  /* Fingerprint SVG lines */
+  .fp-lines {
+    position: absolute; inset: 15%; opacity: 0.25;
+    transition: opacity 0.3s;
+  }
+
+  .fp-scanner.scanning .fp-bg {
+    border-color: rgba(0,255,136,0.8);
+    box-shadow: 0 0 60px rgba(0,255,136,0.4), inset 0 0 40px rgba(0,255,136,0.1);
+    animation: scanPulse 1s ease-in-out infinite;
+  }
+  .fp-scanner.scanning .fp-lines { opacity: 0.8; }
+  @keyframes scanPulse {
+    0%,100%{box-shadow:0 0 60px rgba(0,255,136,0.4),inset 0 0 40px rgba(0,255,136,0.1);}
+    50%{box-shadow:0 0 100px rgba(0,255,136,0.7),inset 0 0 60px rgba(0,255,136,0.2);}
+  }
+
+  .scan-line {
+    position: absolute; left: 15%; right: 15%; height: 3px;
+    background: linear-gradient(to right, transparent, #00FF88, transparent);
+    box-shadow: 0 0 10px #00FF88;
+    animation: scanMove 1.5s ease-in-out infinite;
+    display: none; border-radius: 2px;
+  }
+  .fp-scanner.scanning .scan-line { display: block; }
+  @keyframes scanMove {
+    0%{top:15%;}
+    50%{top:78%;}
+    100%{top:15%;}
+  }
+
+  .fp-ripple {
+    position: absolute; inset: 0; border-radius: 50%;
+    border: 2px solid rgba(0,255,136,0.5);
+    animation: rippleOut 2s ease-out infinite;
+    display: none;
+  }
+  .fp-scanner.scanning .fp-ripple { display: block; }
+  .fp-scanner.scanning .fp-ripple:nth-child(2){animation-delay:0.5s;}
+  .fp-scanner.scanning .fp-ripple:nth-child(3){animation-delay:1s;}
+  @keyframes rippleOut {
+    0%{transform:scale(1);opacity:0.6;}
+    100%{transform:scale(1.6);opacity:0;}
+  }
+
+  .fp-icon {
+    position: absolute; inset: 25%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: clamp(2.5rem, 10vw, 4rem);
+    transition: transform 0.3s;
+    z-index: 2;
+  }
+  .fp-scanner.scanning .fp-icon { animation: fpBounce 0.5s ease-in-out infinite alternate; }
+  @keyframes fpBounce {
+    from{transform:scale(0.95);}
+    to{transform:scale(1.08);}
+  }
+
+  .fp-label {
+    color: rgba(255,255,255,0.7); font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    margin-top: 15px; letter-spacing: 1px; text-align: center;
+  }
+  .fp-status {
+    color: #00FF88; font-weight: 700;
+    font-size: clamp(0.8rem, 3vw, 1rem);
+    margin-top: 8px; min-height: 24px; letter-spacing: 2px;
+    text-align: center; text-transform: uppercase;
+    animation: statusFlash 1s ease-in-out infinite;
+  }
+  @keyframes statusFlash {
+    0%,100%{opacity:1;}
+    50%{opacity:0.5;}
+  }
+
+  /* Health Results */
+  .health-results {
+    width: 100%; max-width: 380px;
+    display: none; flex-direction: column; gap: 12px;
+  }
+  .health-results.show { display: flex; }
+
+  .result-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(0,255,136,0.2);
+    border-radius: 16px; padding: 14px 18px;
+    display: flex; align-items: center; gap: 14px;
+    animation: cardSlide 0.5s ease-out both;
+    backdrop-filter: blur(10px);
+    position: relative; overflow: hidden;
+  }
+  .result-card::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(0,255,136,0.03), transparent);
+    border-radius: 16px;
+  }
+  @keyframes cardSlide {
+    from{transform:translateX(-40px);opacity:0;}
+    to{transform:translateX(0);opacity:1;}
+  }
+
+  .card-icon { font-size: clamp(1.8rem, 6vw, 2.5rem); flex-shrink: 0; }
+
+  .card-info { flex: 1; min-width: 0; }
+  .card-name {
+    color: rgba(255,255,255,0.6); font-size: clamp(0.65rem, 2.2vw, 0.78rem);
+    letter-spacing: 2px; text-transform: uppercase; margin-bottom: 3px;
+  }
+  .card-value {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+    font-weight: 700; color: #00FF88;
+    filter: drop-shadow(0 0 8px rgba(0,255,136,0.4));
+  }
+  .card-unit { color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-left: 4px; }
+
+  .card-bar {
+    width: 100%; height: 6px; background: rgba(255,255,255,0.1);
+    border-radius: 3px; margin-top: 8px; overflow: hidden;
+  }
+  .card-bar-fill {
+    height: 100%; border-radius: 3px;
+    background: linear-gradient(to right, #00FF88, #06B6D4);
+    animation: barGrow 1.5s ease-out both;
+    transform-origin: left;
+  }
+  @keyframes barGrow {
+    from{width:0%;}
+  }
+
+  .card-status-badge {
+    padding: 4px 10px; border-radius: 20px;
+    font-size: clamp(0.6rem, 2vw, 0.7rem);
+    font-weight: 700; letter-spacing: 1px;
+    flex-shrink: 0;
+  }
+  .badge-good { background: rgba(0,255,136,0.15); color: #00FF88; border: 1px solid rgba(0,255,136,0.3); }
+  .badge-normal { background: rgba(6,182,212,0.15); color: #06B6D4; border: 1px solid rgba(6,182,212,0.3); }
+  .badge-high { background: rgba(255,165,0,0.15); color: #FFA500; border: 1px solid rgba(255,165,0,0.3); }
+
+  /* Funny health message */
+  .funny-msg {
+    width: 100%; max-width: 380px;
+    margin-top: 15px;
+    background: linear-gradient(135deg, rgba(255,107,157,0.1), rgba(124,58,237,0.1));
+    border: 1px solid rgba(255,107,157,0.3);
+    border-radius: 20px; padding: 18px;
+    display: none; text-align: center;
+    animation: cardSlide 0.5s ease-out both;
+  }
+  .funny-msg.show { display: block; }
+  .funny-msg-text {
+    color: rgba(255,255,255,0.9); font-size: clamp(0.78rem, 2.8vw, 0.95rem);
+    line-height: 1.7;
+  }
+  .funny-msg-emoji { font-size: 2rem; margin-bottom: 8px; display: block; }
+
+  .rescan-btn {
+    margin-top: 20px;
+    padding: 12px 36px;
+    background: linear-gradient(135deg, #004D2A, #007a42);
+    color: #00FF88; border: 1px solid rgba(0,255,136,0.4);
+    border-radius: 50px; font-family: 'Quicksand', sans-serif;
+    font-size: clamp(0.8rem, 2.8vw, 0.95rem); font-weight: 700;
+    letter-spacing: 2px; cursor: pointer;
+    box-shadow: 0 4px 20px rgba(0,255,136,0.15);
+    display: none; transition: all 0.3s;
+  }
+  .rescan-btn.show { display: block; }
+  .rescan-btn:active { transform: scale(0.96); }
+
+  /* Floating health particles */
+  .health-particles {
+    position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0;
+  }
+  .hp { position: absolute; font-size: 1.2rem; opacity: 0.15;
+    animation: hpFloat var(--hd) var(--hd2) ease-in-out infinite;
+  }
+  @keyframes hpFloat {
+    0%,100%{transform:translateY(0) rotate(0);}
+    50%{transform:translateY(-40px) rotate(180deg);}
+  }
+
+  /* Progress ring */
+  .progress-ring {
+    position: absolute; inset: -12px; pointer-events: none;
+  }
+  .progress-ring circle {
+    fill: none; stroke-width: 3;
+    stroke-dasharray: 502; stroke-dashoffset: 502;
+    stroke: #00FF88; stroke-linecap: round;
+    transform: rotate(-90deg); transform-origin: 50% 50%;
+    transition: stroke-dashoffset 3s ease;
+    filter: drop-shadow(0 0 6px #00FF88);
+  }
+
+  /* Page transition overlay */
+  .transition-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: radial-gradient(circle, #FFD700, #FF4D8D, #7C3AED);
+    transform: scale(0); border-radius: 50%;
+    pointer-events: none;
+    transition: transform 0.6s cubic-bezier(0.4,0,0.2,1), border-radius 0.6s;
+  }
+  .transition-overlay.expanding {
+    transform: scale(4); border-radius: 0;
+  }
+  .transition-overlay.contracting {
+    transform: scale(4); border-radius: 0;
+    transition: none;
+  }
+  .transition-overlay.done {
+    transform: scale(0); border-radius: 50%;
+  }
+</style>
+</head>
+<body>
+
+<!-- TRANSITION OVERLAY -->
+<div class="transition-overlay" id="transOverlay"></div>
+
+<!-- ===== PAGE 1: INTRO + COUNTDOWN ===== -->
+<div class="page active" id="page1">
+  <div class="starfield" id="starfield"></div>
+  <div class="cube-container" id="cubeContainer"></div>
+
+  <div class="floating-3d-scene">
+    <div class="orb-3d">
+      <div class="orb-ring"></div>
+      <div class="orb-ring"></div>
+    </div>
+    <div class="intro-title">✨ A Special Moment ✨</div>
+    <div class="countdown-wrap">
+      <div class="countdown-number" id="countNum">3</div>
+      <div class="countdown-label">Get Ready...</div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PAGE 2: GOOD MORNING ===== -->
+<div class="page" id="page2">
+  <div class="aurora"></div>
+  <div class="emoji-rain" id="emojiRain"></div>
+
+  <div class="morning-scene">
+    <div class="sun-3d">
+      <div class="sun-rays" id="sunRays"></div>
+    </div>
+
+    <div class="greeting-text">
+      ☀️ Good Morning
+      <span class="greeting-name">Ankku Dii! 💖</span>
+    </div>
+
+    <div class="morning-msg">
+      🌸 Aaj ka din aapke liye bahut special hai!<br>
+      Duniya ki sabse pyaari dii ko<br>
+      <strong style="color:#FFD700;">Subah ki pehli roshni ka pyaar 💛</strong><br>
+      Khush raho, Healthy raho! 🌺
+    </div>
+
+    <button class="btn-3d" onclick="goToPage3()">
+      💪 Check Your Health →
+    </button>
+  </div>
+</div>
+
+<!-- ===== PAGE 3: HEALTH CHECK ===== -->
+<div class="page" id="page3">
+  <div class="health-particles" id="healthParticles"></div>
+
+  <div class="health-header">
+    <div class="health-title">🏥 Ankku Dii's Health Check</div>
+    <div class="health-sub">Touch fingerprint to scan • Powered by love 💚</div>
+  </div>
+
+  <!-- FINGERPRINT SCANNER -->
+  <div class="fp-container">
+    <div class="fp-scanner" id="fpScanner" onclick="startScan()">
+      <div class="fp-bg">
+        <!-- Animated fingerprint SVG -->
+        <svg class="fp-lines" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50,15 C30,15 15,30 15,50 C15,70 30,85 50,85 C70,85 85,70 85,50 C85,30 70,15 50,15" fill="none" stroke="#00FF88" stroke-width="1.2"/>
+          <path d="M50,22 C34,22 22,34 22,50 C22,66 34,78 50,78 C66,78 78,66 78,50 C78,34 66,22 50,22" fill="none" stroke="#00FF88" stroke-width="1.2"/>
+          <path d="M50,29 C37,29 29,37 29,50 C29,63 37,71 50,71 C63,71 71,63 71,50 C71,37 63,29 50,29" fill="none" stroke="#00FF88" stroke-width="1.2"/>
+          <path d="M50,36 C41,36 36,41 36,50 C36,59 41,64 50,64 C59,64 64,59 64,50 C64,41 59,36 50,36" fill="none" stroke="#00FF88" stroke-width="1.2"/>
+          <path d="M50,43 C45,43 43,45 43,50 C43,55 45,57 50,57 C55,57 57,55 57,50 C57,45 55,43 50,43" fill="none" stroke="#00FF88" stroke-width="1.2"/>
+          <!-- Ridge details -->
+          <path d="M35,30 C32,40 32,60 35,70" fill="none" stroke="#00FF88" stroke-width="0.8"/>
+          <path d="M65,30 C68,40 68,60 65,70" fill="none" stroke="#00FF88" stroke-width="0.8"/>
+          <path d="M25,45 C25,55 26,62 30,68" fill="none" stroke="#00FF88" stroke-width="0.8"/>
+          <path d="M75,45 C75,55 74,62 70,68" fill="none" stroke="#00FF88" stroke-width="0.8"/>
+          <circle cx="50" cy="50" r="2" fill="#00FF88" opacity="0.6"/>
+        </svg>
+      </div>
+      <!-- Scan line -->
+      <div class="scan-line"></div>
+      <!-- Ripple rings -->
+      <div class="fp-ripple"></div>
+      <div class="fp-ripple"></div>
+      <div class="fp-ripple"></div>
+      <!-- Progress ring -->
+      <svg class="progress-ring" viewBox="0 0 224 224">
+        <circle cx="112" cy="112" r="108" id="progressCircle"/>
+      </svg>
+      <!-- Icon -->
+      <div class="fp-icon" id="fpIcon">👆</div>
+    </div>
+
+    <div class="fp-label">Tap to place your finger 👆</div>
+    <div class="fp-status" id="fpStatus">READY TO SCAN</div>
+  </div>
+
+  <!-- Health Results (hidden until scan) -->
+  <div class="health-results" id="healthResults">
+
+    <div class="result-card" style="animation-delay:0.1s">
+      <div class="card-icon">❤️</div>
+      <div class="card-info">
+        <div class="card-name">Heart Rate</div>
+        <div class="card-value" id="heartVal">--</div>
+        <div class="card-bar"><div class="card-bar-fill" id="heartBar" style="width:0%"></div></div>
+      </div>
+      <div class="card-status-badge badge-good" id="heartBadge">♥ BPM</div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0.2s">
+      <div class="card-icon">🩸</div>
+      <div class="card-info">
+        <div class="card-name">Blood Oxygen SpO2</div>
+        <div class="card-value" id="spo2Val">--</div>
+        <div class="card-bar"><div class="card-bar-fill" id="spo2Bar" style="width:0%;background:linear-gradient(to right,#06B6D4,#7C3AED)"></div></div>
+      </div>
+      <div class="card-status-badge badge-normal" id="spo2Badge">% SpO2</div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0.3s">
+      <div class="card-icon">🌡️</div>
+      <div class="card-info">
+        <div class="card-name">Body Temperature</div>
+        <div class="card-value" id="tempVal">--</div>
+        <div class="card-bar"><div class="card-bar-fill" id="tempBar" style="width:0%;background:linear-gradient(to right,#FFA500,#FF4500)"></div></div>
+      </div>
+      <div class="card-status-badge badge-normal" id="tempBadge">°C</div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0.4s">
+      <div class="card-icon">😴</div>
+      <div class="card-info">
+        <div class="card-name">Stress Level</div>
+        <div class="card-value" id="stressVal">--</div>
+        <div class="card-bar"><div class="card-bar-fill" id="stressBar" style="width:0%;background:linear-gradient(to right,#00FF88,#FFD700)"></div></div>
+      </div>
+      <div class="card-status-badge badge-good" id="stressBadge">Level</div>
+    </div>
+
+    <div class="result-card" style="animation-delay:0.5s">
+      <div class="card-icon">⚡</div>
+      <div class="card-info">
+        <div class="card-name">Energy Level</div>
+        <div class="card-value" id="energyVal">--</div>
+        <div class="card-bar"><div class="card-bar-fill" id="energyBar" style="width:0%;background:linear-gradient(to right,#FFD700,#FF6B9D)"></div></div>
+      </div>
+      <div class="card-status-badge badge-good" id="energyBadge">Score</div>
+    </div>
+
+  </div>
+
+  <!-- Funny Message -->
+  <div class="funny-msg" id="funnyMsg">
+    <span class="funny-msg-emoji" id="funnyEmoji">😄</span>
+    <div class="funny-msg-text" id="funnyText"></div>
+  </div>
+
+  <!-- Rescan Button -->
+  <button class="rescan-btn" id="rescanBtn" onclick="resetScan()">
+    🔄 SCAN AGAIN
+  </button>
+</div>
+
+<script>
+// ===================== AUDIO =====================
+const AudioCtx = window.AudioContext || window.webkitAudioContext;
+let audioCtx;
+
+function initAudio() {
+  if (!audioCtx) audioCtx = new AudioCtx();
+}
+
+function playBeep(freq, dur, type='sine', vol=0.3) {
+  if (!audioCtx) return;
+  try {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.frequency.value = freq; osc.type = type;
+    gain.gain.setValueAtTime(vol, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+    osc.start(audioCtx.currentTime);
+    osc.stop(audioCtx.currentTime + dur);
+  } catch(e){}
+}
+
+function playCountBeep(n) {
+  initAudio();
+  playBeep(n === 0 ? 880 : 440 + n * 80, 0.3, 'sine', 0.4);
+}
+
+function playScanTick() {
+  initAudio();
+  playBeep(800 + Math.random()*400, 0.05, 'square', 0.08);
+}
+
+function playSuccess() {
+  initAudio();
+  const notes = [523, 659, 784, 1047];
+  notes.forEach((f, i) => {
+    setTimeout(() => playBeep(f, 0.3, 'sine', 0.3), i * 150);
+  });
+}
+
+function playHeartbeat() {
+  initAudio();
+  playBeep(80, 0.15, 'sine', 0.5);
+  setTimeout(() => playBeep(80, 0.12, 'sine', 0.35), 180);
+}
+
+// ===================== STARS =====================
+(function createStars() {
+  const sf = document.getElementById('starfield');
+  for (let i = 0; i < 120; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = Math.random() * 3 + 1;
+    s.style.cssText = `
+      width:${sz}px;height:${sz}px;
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      --d:${2+Math.random()*4}s;
+      animation-delay:${Math.random()*4}s;
+    `;
+    sf.appendChild(s);
+  }
+})();
+
+// ===================== 3D CUBES =====================
+(function createCubes() {
+  const cc = document.getElementById('cubeContainer');
+  for (let i = 0; i < 12; i++) {
+    const c = document.createElement('div');
+    c.className = 'mini-cube';
+    for (let f = 0; f < 6; f++) c.appendChild(document.createElement('div'));
+    const sx = Math.random()*100-50, sy = Math.random()*100-50;
+    const ex = Math.random()*100-50, ey = Math.random()*100-50;
+    c.style.cssText = `
+      left:${Math.random()*80+10}%;top:${Math.random()*80+10}%;
+      --sx:${sx}px;--sy:${sy}px;--ex:${ex}px;--ey:${ey}px;
+      --dur:${6+Math.random()*8}s;
+      animation-delay:${Math.random()*5}s;
+    `;
+    cc.appendChild(c);
+  }
+})();
+
+// ===================== SUN RAYS =====================
+(function createRays() {
+  const sr = document.getElementById('sunRays');
+  if (!sr) return;
+  for (let i = 0; i < 16; i++) {
+    const r = document.createElement('div');
+    r.className = 'ray';
+    const h = 40 + Math.random() * 40;
+    r.style.cssText = `
+      height:${h}px;
+      transform:rotate(${i*22.5}deg) translateX(-50%);
+      opacity:${0.4+Math.random()*0.4};
+      margin-left:-1.5px;
+    `;
+    sr.appendChild(r);
+  }
+})();
+
+// ===================== EMOJI RAIN =====================
+(function createEmojiRain() {
+  const er = document.getElementById('emojiRain');
+  if (!er) return;
+  const emojis = ['💖','🌸','✨','🌺','☀️','💛','🌼','💗','🌟','🦋'];
+  for (let i = 0; i < 20; i++) {
+    const e = document.createElement('div');
+    e.className = 'falling-emoji';
+    e.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+    e.style.cssText = `
+      left:${Math.random()*100}%;
+      --fd:${5+Math.random()*8}s;
+      --fd2:${Math.random()*5}s;
+    `;
+    er.appendChild(e);
+  }
+})();
+
+// ===================== HEALTH PARTICLES =====================
+(function createHealthParticles() {
+  const hp = document.getElementById('healthParticles');
+  if (!hp) return;
+  const icons = ['💊','🩺','🫀','🧬','💉','🔬','🩹','🫁','🧠','⚕️'];
+  for (let i = 0; i < 15; i++) {
+    const p = document.createElement('div');
+    p.className = 'hp';
+    p.textContent = icons[Math.floor(Math.random()*icons.length)];
+    p.style.cssText = `
+      left:${Math.random()*100}%;top:${Math.random()*100}%;
+      --hd:${4+Math.random()*6}s;
+      --hd2:${Math.random()*4}s;
+    `;
+    hp.appendChild(p);
+  }
+})();
+
+// ===================== COUNTDOWN =====================
+let countdownDone = false;
+
+function runCountdown() {
+  const el = document.getElementById('countNum');
+  let count = 3;
+  
+  function tick() {
+    if (count > 0) {
+      el.style.animation = 'none';
+      el.offsetHeight; // reflow
+      el.style.animation = 'countPop 0.9s ease-in-out forwards';
+      el.textContent = count;
+      playCountBeep(count);
+      count--;
+      setTimeout(tick, 1000);
+    } else {
+      el.style.animation = 'none';
+      el.offsetHeight;
+      el.style.animation = 'countPop 0.7s ease-in-out forwards';
+      el.textContent = '🎉';
+      playCountBeep(0);
+      setTimeout(() => {
+        if (!countdownDone) {
+          countdownDone = true;
+          goToPage2();
+        }
+      }, 900);
+    }
+  }
+  
+  setTimeout(tick, 500);
+}
+
+// ===================== PAGE TRANSITIONS =====================
+function transitionTo(targetPageId, cb) {
+  const overlay = document.getElementById('transOverlay');
+  overlay.classList.add('expanding');
+  setTimeout(() => {
+    cb();
+    overlay.classList.remove('expanding');
+    overlay.classList.add('contracting');
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        overlay.classList.add('done');
+        overlay.classList.remove('contracting');
+        setTimeout(() => overlay.classList.remove('done'), 700);
+      });
+    });
+  }, 600);
+}
+
+function goToPage2() {
+  transitionTo('page2', () => {
+    document.getElementById('page1').classList.remove('active');
+    document.getElementById('page2').classList.add('active');
+  });
+}
+
+function goToPage3() {
+  initAudio();
+  transitionTo('page3', () => {
+    document.getElementById('page2').classList.remove('active');
+    document.getElementById('page3').classList.add('active');
+  });
+}
+
+// ===================== FINGERPRINT SCAN =====================
+let isScanning = false;
+let scanInterval;
+let heartbeatInterval;
+let scanProgress = 0;
+
+const funnyMessages = [
+  {
+    emoji: '😂',
+    text: "Doctor bole: 'Ankku Dii, aapka health report dekh ke machine bhi sharma gayi! Itna healthy toh woh bhi nahi thi!' 🏥💪"
+  },
+  {
+    emoji: '🤣',
+    text: "Scan result: Aapke dil mein itna pyaar hai ki blood pressure normal hai aur smile rate 200 BPM! Doctor ki degree waste ho gayi! 😍"
+  },
+  {
+    emoji: '😆',
+    text: "AI doctor says: 'Aapki body mein sirf ek problem hai — itni energy hai ki charger dhundte dhundte thak gayi!' ⚡😄"
+  },
+  {
+    emoji: '🥹',
+    text: "Health report boli: Stress kam karo, chai zyada peeyo, aur sabse important — din mein ek baar mirror mein dekho aur khud ko 'Most Beautiful' bolo! 🪞💖"
+  }
+];
+
+function startScan() {
+  if (isScanning) return;
+  initAudio();
+  isScanning = true;
+  scanProgress = 0;
+  
+  const scanner = document.getElementById('fpScanner');
+  const status = document.getElementById('fpStatus');
+  const icon = document.getElementById('fpIcon');
+  const circle = document.getElementById('progressCircle');
+  
+  scanner.classList.add('scanning');
+  status.textContent = 'SCANNING...';
+  icon.textContent = '🔬';
+  
+  // Hide previous results
+  document.getElementById('healthResults').classList.remove('show');
+  document.getElementById('funnyMsg').classList.remove('show');
+  document.getElementById('rescanBtn').classList.remove('show');
+
+  // Sound ticking
+  let tickCount = 0;
+  scanInterval = setInterval(() => {
+    scanProgress += 2.5;
+    tickCount++;
+    if (tickCount % 3 === 0) playScanTick();
+    if (tickCount % 8 === 0) playHeartbeat();
+    
+    // Update progress ring
+    const dashOffset = 502 - (502 * scanProgress / 100);
+    circle.style.strokeDashoffset = dashOffset;
+    
+    if (scanProgress >= 100) {
+      clearInterval(scanInterval);
+      completeScan();
+    }
+  }, 45);
+}
+
+function completeScan() {
+  playSuccess();
+  
+  const scanner = document.getElementById('fpScanner');
+  const status = document.getElementById('fpStatus');
+  const icon = document.getElementById('fpIcon');
+  
+  scanner.classList.remove('scanning');
+  icon.textContent = '✅';
+  status.textContent = 'SCAN COMPLETE!';
+  status.style.color = '#FFD700';
+  
+  // Generate random health values
+  const heart = 68 + Math.floor(Math.random() * 18); // 68-86
+  const spo2 = 96 + Math.floor(Math.random() * 4); // 96-99
+  const temp = (36.2 + Math.random() * 0.8).toFixed(1); // 36.2-37.0
+  const stress = ['Low', 'Normal', 'Calm'][Math.floor(Math.random()*3)];
+  const stressVal = stress === 'Low' ? 20+Math.floor(Math.random()*15) : stress === 'Calm' ? 10+Math.floor(Math.random()*10) : 30+Math.floor(Math.random()*20);
+  const energy = 70 + Math.floor(Math.random() * 25); // 70-95
+  
+  setTimeout(() => {
+    // Show results
+    document.getElementById('healthResults').classList.add('show');
+    
+    // Animate values in
+    setTimeout(() => {
+      animateValue('heartVal', 0, heart, 1200, ' BPM');
+      document.getElementById('heartBar').style.width = ((heart-40)/100*100)+'%';
+      document.getElementById('heartBadge').textContent = heart < 80 ? '✅ Normal' : '⚡ Active';
+    }, 100);
+    
+    setTimeout(() => {
+      animateValue('spo2Val', 90, spo2, 1000, '%');
+      document.getElementById('spo2Bar').style.width = spo2 + '%';
+      document.getElementById('spo2Badge').textContent = '✅ Excellent';
+    }, 400);
+    
+    setTimeout(() => {
+      document.getElementById('tempVal').textContent = temp + '°C';
+      document.getElementById('tempBar').style.width = '75%';
+      document.getElementById('tempBadge').textContent = parseFloat(temp) < 37 ? '✅ Normal' : '🌡️ Warm';
+    }, 700);
+    
+    setTimeout(() => {
+      document.getElementById('stressVal').textContent = stress;
+      document.getElementById('stressBar').style.width = (100-stressVal) + '%';
+      document.getElementById('stressBadge').textContent = '😊 Good';
+    }, 1000);
+    
+    setTimeout(() => {
+      animateValue('energyVal', 0, energy, 800, '/100');
+      document.getElementById('energyBar').style.width = energy + '%';
+      document.getElementById('energyBadge').textContent = energy > 85 ? '⚡ High' : '✅ Good';
+    }, 1300);
+    
+    // Funny message
+    setTimeout(() => {
+      const msg = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
+      document.getElementById('funnyEmoji').textContent = msg.emoji;
+      document.getElementById('funnyText').textContent = msg.text;
+      document.getElementById('funnyMsg').classList.add('show');
+      document.getElementById('rescanBtn').classList.add('show');
+      
+      // Victory heartbeat sound
+      let hb = 0;
+      const hbi = setInterval(() => {
+        playHeartbeat();
+        hb++;
+        if (hb >= 4) clearInterval(hbi);
+      }, 700);
+    }, 2000);
+    
+    isScanning = false;
+  }, 500);
+}
+
+function animateValue(id, start, end, dur, suffix) {
+  const el = document.getElementById(id);
+  const startTime = performance.now();
+  function update(now) {
+    const t = Math.min((now - startTime) / dur, 1);
+    const val = Math.floor(start + (end - start) * easeOut(t));
+    el.textContent = val + suffix;
+    if (t < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+function easeOut(t) { return 1 - Math.pow(1-t, 3); }
+
+function resetScan() {
+  initAudio();
+  const circle = document.getElementById('progressCircle');
+  circle.style.strokeDashoffset = '502';
+  circle.style.transition = 'none';
+  setTimeout(() => circle.style.transition = 'stroke-dashoffset 3s ease', 50);
+  
+  document.getElementById('fpIcon').textContent = '👆';
+  document.getElementById('fpStatus').textContent = 'READY TO SCAN';
+  document.getElementById('fpStatus').style.color = '#00FF88';
+  document.getElementById('healthResults').classList.remove('show');
+  document.getElementById('funnyMsg').classList.remove('show');
+  document.getElementById('rescanBtn').classList.remove('show');
+  isScanning = false;
+  playBeep(300, 0.2, 'sine', 0.2);
+}
+
+// ===================== TOUCH SUPPORT =====================
+document.getElementById('fpScanner').addEventListener('touchstart', (e) => {
+  e.preventDefault();
+  startScan();
+}, { passive: false });
+
+// ===================== START =====================
+document.addEventListener('click', initAudio, { once: true });
+document.addEventListener('touchstart', initAudio, { once: true });
+runCountdown();
+</script>
+</body>
+</html>
